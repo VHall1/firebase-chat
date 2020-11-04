@@ -53,7 +53,12 @@ const Default: React.FC = () => {
 
   const signOut = async () => {
     if (user) {
-      await auth.signOut();
+      try {
+        await auth.signOut();
+      } catch (error) {
+        console.error(error);
+      }
+
       toast({
         title: "Successfully logged out.",
         description: "We hope to see you again later 🤗",
