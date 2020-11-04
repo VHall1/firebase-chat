@@ -16,6 +16,7 @@ export const Message: React.FC<MessageProps> = ({ text, uid, photoURL }) => {
   return (
     <div className={`message ${messageClass}`}>
       <img
+        alt="Profile"
         src={
           photoURL ||
           "https://i.pinimg.com/originals/ba/9f/45/ba9f45ae9b0dc641ff49408d4c56a66d.jpg"
