@@ -26,6 +26,7 @@ const Default: React.FC = () => {
   const query = messagesRef.orderBy("createdAt", "desc").limit(25);
 
   const [messages] = useCollectionData<MessageProps>(query, { idField: "id" });
+  const formattedMessages = messages?.reverse();
 
   const submitMessage = async (e: any) => {
     e.preventDefault();
@@ -61,17 +62,15 @@ const Default: React.FC = () => {
         px={4}
       >
         {user ? (
-          messages &&
-          messages
-            .reverse()
-            .map((msg: MessageProps) => (
-              <Message
-                key={msg.id}
-                text={msg.text}
-                uid={msg.uid}
-                photoURL={msg.photoURL}
-              />
-            ))
+          formattedMessages &&
+          formattedMessages.map((msg: MessageProps) => (
+            <Message
+              key={msg.id}
+              text={msg.text}
+              uid={msg.uid}
+              photoURL={msg.photoURL}
+            />
+          ))
         ) : (
           <Box m="auto" color="#efeff1">
             <Text fontWeight="600" textAlign="center">
