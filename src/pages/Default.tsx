@@ -52,7 +52,14 @@ const Default: React.FC = () => {
   return (
     <Flex id="chat-wrapper">
       <Header />
-      <Flex backgroundColor="#0D1418" direction="column" flex="1" py={2} px={4}>
+      <Flex
+        backgroundColor="#0D1418"
+        style={{ overflowY: "scroll" }}
+        direction="column"
+        flex="1"
+        py={2}
+        px={4}
+      >
         {user ? (
           messages &&
           messages.map((msg: MessageProps) => (
