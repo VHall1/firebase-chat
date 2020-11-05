@@ -85,7 +85,6 @@ const Default: React.FC = () => {
           >
             {emoji && (
               <Picker
-                native
                 theme="dark"
                 onSelect={(emoji) => {
                   console.log(emoji);
@@ -98,8 +97,9 @@ const Default: React.FC = () => {
             <IconButton
               icon={FaGrin}
               onClick={openEmoji}
-              aria-label="Send"
-              variant="unstyled"
+              aria-label="Emojis"
+              variant="ghost"
+              variantColor="#18181b"
             />
             <input
               placeholder="message..."
@@ -111,7 +111,8 @@ const Default: React.FC = () => {
             <IconButton
               icon={FaPaperPlane}
               aria-label="Send"
-              variant="unstyled"
+              variant="ghost"
+              variantColor="#18181b"
               type="submit"
             />
           </Flex>

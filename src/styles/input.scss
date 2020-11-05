@@ -9,13 +9,19 @@
 
     background-color: #33383b;
   }
-  > button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+
   > .emoji-mart {
+    max-width: 92vw;
+
     position: absolute;
     bottom: 90px;
+    .emoji-mart-anchor-icon {
+      display: flex;
+      justify-content: center;
+    }
+    .emoji-mart-category-list {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+    }
   }
 }
