@@ -23,7 +23,7 @@ const Default: React.FC = () => {
   const [user] = useAuthState(auth);
 
   const messagesRef = firestore.collection("messages");
-  const query = messagesRef.orderBy("createdAt").limit(25);
+  const query = messagesRef.orderBy("createdAt", "desc").limit(25);
 
   const [messages] = useCollectionData<MessageProps>(query, { idField: "id" });
 
@@ -62,14 +62,16 @@ const Default: React.FC = () => {
       >
         {user ? (
           messages &&
-          messages.map((msg: MessageProps) => (
-            <Message
-              key={msg.id}
-              text={msg.text}
-              uid={msg.uid}
-              photoURL={msg.photoURL}
-            />
-          ))
+          messages
+            .reverse()
+            .map((msg: MessageProps) => (
+              <Message
+                key={msg.id}
+                text={msg.text}
+                uid={msg.uid}
+                photoURL={msg.photoURL}
+              />
+            ))
         ) : (
           <Box m="auto" color="#efeff1">
             <Text fontWeight="600" textAlign="center">
