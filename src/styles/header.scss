@@ -1,0 +1,9 @@
+.header {
+  .display-name {
+    font-weight: 500;
+    max-width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}

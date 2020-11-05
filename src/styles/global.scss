@@ -2,6 +2,13 @@
   height: 100vh;
 }
 
+#chat-wrapper {
+  overflow-y: hidden;
+  height: 100%;
+
+  flex-direction: column;
+}
+
 .wrapper {
   height: 80vh;
   background-color: #282c34;
@@ -43,3 +50,5 @@
     margin: 2px 5px;
   }
 }
+
+@import "./header.scss";
