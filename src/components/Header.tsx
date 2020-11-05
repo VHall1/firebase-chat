@@ -2,14 +2,15 @@ import React, { useContext } from "react";
 import { Flex, Box, Text, IconButton, Button, useToast } from "@chakra-ui/core";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { FiLogOut } from "react-icons/fi";
+import { FaSignOutAlt } from "react-icons/fa";
 import { FirebaseContext } from "../App";
 
 const Header: React.FC = () => {
   const toast = useToast();
+  const [loading, setLoading] = useState<boolean>(false);
+
   const { firebase, auth } = useContext(FirebaseContext);
   const [user] = useAuthState(auth);
-  const [loading, setLoading] = useState<boolean>(false);
 
   const signOut = async () => {
     if (user) {
@@ -32,6 +33,7 @@ const Header: React.FC = () => {
   const signIn = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     setLoading(true);
+
     try {
       await auth.signInWithPopup(provider);
     } catch (error) {
@@ -56,7 +58,6 @@ const Header: React.FC = () => {
       backgroundColor="#18181B"
       color="#efeff1"
       alignItems="center"
-      height="56px"
       className="header"
     >
       <Flex>
@@ -70,7 +71,7 @@ const Header: React.FC = () => {
           <IconButton
             variant="ghost"
             variantColor="#18181b"
-            icon={FiLogOut}
+            icon={FaSignOutAlt}
             onClick={signOut}
             aria-label="Log-out"
           />

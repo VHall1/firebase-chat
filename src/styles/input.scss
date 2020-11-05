@@ -1,0 +1,21 @@
+.input {
+  > input {
+    flex: 1;
+
+    margin: 0 8px;
+    padding: 0 16px;
+    border-radius: 56px;
+    outline: none;
+
+    background-color: #33383b;
+  }
+  > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  > .emoji-mart {
+    position: absolute;
+    bottom: 90px;
+  }
+}

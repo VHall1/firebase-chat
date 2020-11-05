@@ -6,6 +6,7 @@ import React from "react";
 import "./styles/global.scss";
 import Default from "./pages/Default";
 import { firebaseConfig } from "./firebaseConfig";
+import "emoji-mart/css/emoji-mart.css";
 
 firebase.initializeApp(firebaseConfig);
 

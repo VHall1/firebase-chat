@@ -1,11 +1,12 @@
-import { Flex, Text, Box, IconButton, Input } from "@chakra-ui/core";
+import { Flex, Text, Box, IconButton } from "@chakra-ui/core";
 import React, { useContext, useState } from "react";
-import { FiSend } from "react-icons/fi";
+import { FaGrin, FaPaperPlane } from "react-icons/fa";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { FirebaseContext } from "../App";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Message } from "../components/Message";
 import Header from "../components/Header";
+import { Picker } from "emoji-mart";
 
 export interface MessageProps {
   text: string;
@@ -16,6 +17,7 @@ export interface MessageProps {
 
 const Default: React.FC = () => {
   const [message, setMessage] = useState("");
+  const [emoji, setEmoji] = useState(false);
   const { firebase, auth, firestore } = useContext(FirebaseContext);
 
   const [user] = useAuthState(auth);
@@ -41,11 +43,16 @@ const Default: React.FC = () => {
     setMessage("");
   };
 
+  const openEmoji = () => {
+    setEmoji((oldEmoji) => {
+      return !oldEmoji;
+    });
+  };
+
   return (
     <Flex id="chat-wrapper">
       <Header />
-      {/* Body */}
-      <Flex direction="column" flex="1" py={2} px={4}>
+      <Flex backgroundColor="#0D1418" direction="column" flex="1" py={2} px={4}>
         {user ? (
           messages &&
           messages.map((msg: MessageProps) => (
@@ -68,23 +75,43 @@ const Default: React.FC = () => {
       </Flex>
       {user && (
         <form onSubmit={submitMessage}>
-          <Flex mt="auto" px={4} mb={4}>
-            <Input
+          <Flex
+            className="input"
+            backgroundColor="#18181B"
+            color="#efeff1"
+            mt="auto"
+            px={4}
+            py={4}
+          >
+            {emoji && (
+              <Picker
+                native
+                theme="dark"
+                onSelect={(emoji) => {
+                  console.log(emoji);
+                  setMessage((oldMessage) => {
+                    return `${oldMessage} ${(emoji as any).native}`;
+                  });
+                }}
+              />
+            )}
+            <IconButton
+              icon={FaGrin}
+              onClick={openEmoji}
+              aria-label="Send"
+              variant="unstyled"
+            />
+            <input
               placeholder="message..."
-              style={{
-                borderTopRightRadius: 0,
-                borderBottomRightRadius: 0,
-              }}
               name="message"
-              isRequired
+              required
               value={message}
               onChange={(e: any) => setMessage(e.target.value)}
             />
             <IconButton
-              backgroundColor="#fff"
-              icon={FiSend}
+              icon={FaPaperPlane}
               aria-label="Send"
-              style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
+              variant="unstyled"
               type="submit"
             />
           </Flex>
