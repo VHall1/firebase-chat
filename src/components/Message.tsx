@@ -29,7 +29,9 @@ export const Message: React.FC<MessageProps> = ({
         }
       />
       <Flex className="inner-message" direction="column">
-        <Text fontSize="xs">{displayName}</Text>
+        <Text fontSize="xs" className="username">
+          {displayName}
+        </Text>
         <Text>{text}</Text>
       </Flex>
     </div>
