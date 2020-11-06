@@ -10,7 +10,7 @@ const Header: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const { firebase, auth } = useContext(FirebaseContext);
-  const [user] = useAuthState(auth);
+  const [user, isLoading] = useAuthState(auth);
 
   const signOut = async () => {
     if (user) {
@@ -80,7 +80,7 @@ const Header: React.FC = () => {
             variant="ghost"
             aria-label="Log-in"
             variantColor="#18181b"
-            isLoading={loading}
+            isLoading={loading || isLoading}
             onClick={signIn}
           >
             🚀 Log-in
