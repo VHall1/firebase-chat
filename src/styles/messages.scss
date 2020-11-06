@@ -2,26 +2,29 @@
   display: flex;
   align-items: center;
 
-  width: 80%;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+
+  .inner-message {
+    max-width: 70vw;
+    word-wrap: break-word;
+    border-radius: 8px;
+    padding: 4px 12px;
+    margin-right: 8px;
+  }
 
   &.sent {
-    margin-left: auto;
     flex-direction: row-reverse;
-    > p {
-      border-radius: 8px;
-      padding: 4px 12px;
-      margin-right: 8px;
+    text-align: right;
+    margin-left: auto;
+    > .inner-message {
       color: white;
       background: #0b93f6;
       align-self: flex-end;
     }
   }
 
-  &.received p {
-    border-radius: 8px;
-    padding: 4px 12px;
-    margin-left: 8px;
+  &.received .inner-message {
+    text-align: left;
     background: #e5e5ea;
     color: black;
   }
@@ -30,6 +33,6 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    margin: 2px 5px;
+    margin: 2px 5px auto;
   }
 }

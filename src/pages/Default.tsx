@@ -12,6 +12,7 @@ export interface MessageProps {
   uid: string;
   photoURL: string;
   id: string;
+  author: string;
 }
 
 const Default: React.FC = () => {
@@ -62,6 +63,7 @@ const Default: React.FC = () => {
                 text={msg.text}
                 uid={msg.uid}
                 photoURL={msg.photoURL}
+                displayName={msg.author}
               />
             ))
         ) : (

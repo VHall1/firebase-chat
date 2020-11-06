@@ -6,9 +6,15 @@ interface MessageProps {
   text: string;
   uid: string;
   photoURL: string;
+  displayName: string;
 }
 
-export const Message: React.FC<MessageProps> = ({ text, uid, photoURL }) => {
+export const Message: React.FC<MessageProps> = ({
+  text,
+  uid,
+  photoURL,
+  displayName,
+}) => {
   const { auth } = useContext(FirebaseContext);
 
   const messageClass = uid === auth.currentUser!.uid ? "sent" : "received";
@@ -22,7 +28,10 @@ export const Message: React.FC<MessageProps> = ({ text, uid, photoURL }) => {
           "https://i.pinimg.com/originals/ba/9f/45/ba9f45ae9b0dc641ff49408d4c56a66d.jpg"
         }
       />
-      <Flex direction="column">{text}</Flex>
+      <Flex className="inner-message" direction="column">
+        <Text fontSize="xs">{displayName}</Text>
+        <Text>{text}</Text>
+      </Flex>
     </div>
   );
 };

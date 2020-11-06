@@ -1,6 +1,7 @@
 import { Box, Flex, IconButton } from "@chakra-ui/core";
 import { Picker } from "emoji-mart";
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { FaGrin, FaPaperPlane } from "react-icons/fa";
 import { FirebaseContext } from "../App";
 
@@ -11,6 +12,7 @@ export const InputBar: React.FC = () => {
 
   const { firebase, auth, firestore } = useContext(FirebaseContext);
   const messagesRef = firestore.collection("messages");
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
     document.addEventListener("keyup", handleKeyPress);
@@ -44,6 +46,7 @@ export const InputBar: React.FC = () => {
     await messagesRef.add({
       text: message,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      author: user.displayName,
       uid,
       photoURL,
     });
