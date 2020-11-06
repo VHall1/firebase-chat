@@ -1,18 +1,25 @@
 import { CSSReset, ThemeProvider } from "@chakra-ui/core";
+import "emoji-mart/css/emoji-mart.css";
+import "./styles/global.scss";
+import Default from "./pages/Default";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import React from "react";
-import "./styles/global.scss";
-import Default from "./pages/Default";
 import { firebaseConfig } from "./firebaseConfig";
-import "emoji-mart/css/emoji-mart.css";
+import React from "react";
 
+/*
+  Initialises the Firebase client.
+  Consumes the configuration from firebaseConfig.ts
+*/
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
+/*
+  Create context with the respective firebase clients for Auth and Firestore
+*/
 export const FirebaseContext = React.createContext({
   firebase,
   auth,

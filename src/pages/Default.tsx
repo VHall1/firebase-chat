@@ -1,5 +1,5 @@
 import { Flex, Text, Box } from "@chakra-ui/core";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { FirebaseContext } from "../App";
 import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -15,19 +15,26 @@ export interface MessageProps {
 }
 
 const Default: React.FC = () => {
-  const { firebase, auth, firestore } = useContext(FirebaseContext);
+  const { auth, firestore } = useContext(FirebaseContext);
 
   const [user] = useAuthState(auth);
-
   const messagesRef = firestore.collection("messages");
   const query = messagesRef.orderBy("createdAt", "desc").limit(25);
-
   const [messages] = useCollectionData<MessageProps>(query, { idField: "id" });
+
+  useEffect(() => {
+    const chatBox = document.querySelector(".messages-wrapper");
+
+    if (chatBox) {
+      chatBox.scrollTo(0, chatBox.scrollHeight);
+    }
+  }, [messages]);
 
   return (
     <Flex id="chat-wrapper">
       <Header />
       <Flex
+        className="messages-wrapper"
         backgroundColor="#0D1418"
         style={{ overflowY: "scroll" }}
         direction="column"
