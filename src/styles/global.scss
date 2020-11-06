@@ -23,7 +23,11 @@
   display: flex;
   align-items: center;
 
+  width: 80%;
+  margin-bottom: 8px;
+
   &.sent {
+    margin-left: auto;
     flex-direction: row-reverse;
     > p {
       border-radius: 8px;

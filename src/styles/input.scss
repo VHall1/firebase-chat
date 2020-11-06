@@ -1,13 +1,23 @@
 .input {
-  > input {
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+
     flex: 1;
-
-    margin: 0 8px;
-    padding: 0 16px;
+    margin: 0 12px 0 0;
+    padding: 0 20px 0 0;
     border-radius: 56px;
-    outline: none;
-
     background-color: #33383b;
+
+    button {
+      box-shadow: none;
+    }
+    input {
+      flex: 1;
+      outline: none;
+      appearance: none;
+      background: transparent;
+    }
   }
 
   > .emoji-mart {
@@ -22,6 +32,14 @@
     .emoji-mart-category-list {
       display: grid;
       grid-template-columns: repeat(8, 1fr);
+    }
+  }
+
+  .send {
+    border-radius: 100%;
+    background-color: #0b93f6;
+    &:hover {
+      background-color: #0b93f6;
     }
   }
 }
