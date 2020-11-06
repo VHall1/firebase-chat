@@ -40,18 +40,19 @@ export const InputBar: React.FC = () => {
   const submitMessage = async (e: any) => {
     e.preventDefault();
     if (auth.currentUser === null) return;
+    const _message = message;
+    setMessage("");
 
     const { uid, photoURL } = auth.currentUser;
 
     await messagesRef.add({
-      text: message,
+      text: _message,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       author: user.displayName,
       uid,
       photoURL,
     });
 
-    setMessage("");
   };
 
   const openEmoji = () => {
