@@ -1,7 +1,5 @@
 .message {
   display: flex;
-  align-items: center;
-
   margin-bottom: 10px;
 
   .username {
@@ -22,10 +20,12 @@
   &.sent {
     flex-direction: row-reverse;
     text-align: right;
-    margin-left: auto;
     > .inner-message {
       color: white;
       background: #0b93f6;
+      align-self: flex-end;
+    }
+    .username {
       align-self: flex-end;
     }
   }
