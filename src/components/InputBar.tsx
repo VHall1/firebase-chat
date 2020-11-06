@@ -1,15 +1,39 @@
-import { Flex, IconButton } from "@chakra-ui/core";
+import { Box, Flex, IconButton } from "@chakra-ui/core";
 import { Picker } from "emoji-mart";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaGrin, FaPaperPlane } from "react-icons/fa";
 import { FirebaseContext } from "../App";
 
 export const InputBar: React.FC = () => {
+  const node = useRef<HTMLDivElement>(null);
   const [message, setMessage] = useState("");
   const [emoji, setEmoji] = useState(false);
 
   const { firebase, auth, firestore } = useContext(FirebaseContext);
   const messagesRef = firestore.collection("messages");
+
+  useEffect(() => {
+    document.addEventListener("keyup", handleKeyPress);
+    document.addEventListener("mousedown", handleClick);
+    return () => {
+      document.removeEventListener("keyup", handleKeyPress);
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, []);
+
+  const handleClick = (e: any) => {
+    if (node.current?.contains(e.target)) {
+      return;
+    }
+
+    setEmoji(false);
+  };
+
+  const handleKeyPress = (e: any) => {
+    if (e.key === "Escape") {
+      setEmoji(false);
+    }
+  };
 
   const submitMessage = async (e: any) => {
     e.preventDefault();
@@ -44,14 +68,16 @@ export const InputBar: React.FC = () => {
         py={4}
       >
         {emoji && (
-          <Picker
-            theme="dark"
-            onSelect={(emoji) =>
-              setMessage((oldMessage) => {
-                return `${oldMessage} ${(emoji as any).native}`;
-              })
-            }
-          />
+          <Box ref={node} className="emoji-wrapper">
+            <Picker
+              theme="dark"
+              onSelect={(emoji) =>
+                setMessage((oldMessage) => {
+                  return `${oldMessage} ${(emoji as any).native}`;
+                })
+              }
+            />
+          </Box>
         )}
         <div className="input-wrapper">
           <IconButton

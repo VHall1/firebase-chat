@@ -20,18 +20,19 @@
     }
   }
 
-  > .emoji-mart {
-    max-width: 92vw;
-
+  > .emoji-wrapper {
     position: absolute;
     bottom: 90px;
-    .emoji-mart-anchor-icon {
-      display: flex;
-      justify-content: center;
-    }
-    .emoji-mart-category-list {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
+    max-width: 92vw;
+    > .emoji-mart {
+      .emoji-mart-anchor-icon {
+        display: flex;
+        justify-content: center;
+      }
+      .emoji-mart-category-list {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+      }
     }
   }
 

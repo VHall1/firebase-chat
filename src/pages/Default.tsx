@@ -1,4 +1,4 @@
-import { Flex, Text, Box } from "@chakra-ui/core";
+import { Flex, Text, Box, useToast } from "@chakra-ui/core";
 import React, { useContext, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { FirebaseContext } from "../App";
@@ -15,6 +15,7 @@ export interface MessageProps {
 }
 
 const Default: React.FC = () => {
+  const toast = useToast();
   const { auth, firestore } = useContext(FirebaseContext);
 
   const [user] = useAuthState(auth);
@@ -26,6 +27,14 @@ const Default: React.FC = () => {
     const chatBox = document.querySelector(".messages-wrapper");
 
     if (chatBox) {
+      toast({
+        position: "top",
+        render: () => (
+          <Box m={3} color="white" p={3} bg="blue.500" borderRadius="56px">
+            New Message
+          </Box>
+        ),
+      });
       chatBox.scrollTo(0, chatBox.scrollHeight);
     }
   }, [messages]);

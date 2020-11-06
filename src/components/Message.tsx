@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { FirebaseContext } from "../App";
-import { Text } from "@chakra-ui/core";
+import { Flex, Text } from "@chakra-ui/core";
 
 interface MessageProps {
   text: string;
@@ -22,7 +22,7 @@ export const Message: React.FC<MessageProps> = ({ text, uid, photoURL }) => {
           "https://i.pinimg.com/originals/ba/9f/45/ba9f45ae9b0dc641ff49408d4c56a66d.jpg"
         }
       />
-      <Text>{text}</Text>
+      <Flex direction="column">{text}</Flex>
     </div>
   );
 };
